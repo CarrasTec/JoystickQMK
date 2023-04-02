@@ -1,0 +1,41 @@
+{
+    "keyboard_name": "macrokrs", 
+    "manufacturer": "CarrasTech",
+    "url": "", 
+    "maintainer": "CarrasTech",
+    "usb": {
+        "vid": "0x4443",
+        "pid": "0x0CBA",
+        "device_version": "0.0.1"
+    },
+    "matrix_pins": {
+        "cols": ["C6", "D7", "E6", "B4", "B5"],
+        "rows": ["B1", "B3", "B2", "B6"]
+    },
+    "diode_direction": "COL2ROW",
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"label":"K00", "x":0, "y":0}, 
+                {"label":"K01", "x":1, "y":0}, 
+                {"label":"K02", "x":2, "y":0}, 
+                {"label":"K03", "x":3, "y":0}, 
+                {"label":"K04", "x":4, "y":0},
+
+                {"label":"K10", "x":0, "y":1}, 
+                {"label":"K11", "x":1, "y":1}, 
+                {"label":"K12", "x":2, "y":1}, 
+                {"label":"K13", "x":3, "y":1}, 
+                {"label":"K14", "x":4, "y":1},
+
+                {"label":"K20", "x":0, "y":2}, 
+                {"label":"K21", "x":1, "y":2}, 
+                {"label":"K22", "x":2, "y":2}, 
+                {"label":"K23", "x":3, "y":2},
+                 
+                {"label":"K31", "x":1, "y":3}, 
+                {"label":"K32", "x":2, "y":3}
+            ]
+        }
+    }
+}
