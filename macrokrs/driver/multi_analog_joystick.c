@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "joy_input.h"
+#include "multi_analog_joystick.h"
 #include "analog.h"
 #include "gpio.h"
 #include "wait.h"
@@ -129,3 +129,30 @@ void joy_update_keycode(uint16_t keycode, bool last, bool current){
     } 
 }
 
+void pointing_device_driver_init(void) {
+    joy_input_init();
+}
+
+report_mouse_t pointing_device_driver_get_report(report_mouse_t mouse_report) { 
+    report_joy_t data = joy_input_read();
+    mouse_report.x = data.x2;
+    mouse_report.y = data.y2;
+
+    //-- start mouse middle click and drag --
+    if(data.x2 == 0 && data.y2 == 0)
+        mouse_report.buttons = pointing_device_handle_buttons(mouse_report.buttons, false, POINTING_DEVICE_BUTTON3);
+    else
+        mouse_report.buttons = pointing_device_handle_buttons(mouse_report.buttons, true, POINTING_DEVICE_BUTTON3);
+    //-- end mouse middle click and drag --
+
+    joy_state.dir = joy_input_direction(data);
+
+    joy_update_keycode(KC_PMNS, joy_state.lastDir.up, joy_state.dir.up);
+    joy_update_keycode(KC_PPLS, joy_state.lastDir.down, joy_state.dir.down);
+    joy_update_keycode(KC_P4, joy_state.lastDir.left, joy_state.dir.left);
+    joy_update_keycode(KC_P6, joy_state.lastDir.right, joy_state.dir.right);
+    joy_state.lastDir = joy_state.dir;
+
+
+    return mouse_report; 
+}
